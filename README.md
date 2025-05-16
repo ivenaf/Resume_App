@@ -1,27 +1,11 @@
-# Land your dream job: Build your portfolio with Streamlit
-Showcase your coding skills to recruiters with a chatbot tailored to your resume.
+In this repository you will find all necessary files to build your own resumé over streamlit using python code. 
 
-# ❄️[Demo](https://portfolio-template.streamlit.app/?ref=blog.streamlit.io)
+The webapp is not optimized for mobile use. Best display is acheived by  viewing this app over your laptop or pc. 
 
-![ezgif com-video-to-gif (1)](https://github.com/vicky-playground/portfolio-template/assets/90204593/c60f52a9-7026-43ae-a7f3-89cacc730b2d)
+Currently, the webapp consists of 5 pages. 
 
-🤖 Feel free to engage with the chatbot! Here are some sample questions to get you started:
-- hi
-- what's her contact?
-- what's her hobby?
-- what's her education background?
-  
-
-# Dive Deeper with a Tutorial 📘
-Have you ever dreamt of having your own portfolio? Let's make that dream a reality together! I've got a super-friendly, step-by-step guide from the Streamlit Blog that’s got all the help you’ll need. Kickstart your adventure right [here](https://blog.streamlit.io/land-your-dream-job-build-your-portfolio-with-streamlit/).
-In this tutorial, you’ll learn how to build a portfolio with:
-- An AI-powered chatbot that includes custom data, such as a self-introduction
-- Animations
-- Career snapshot with a timeline
-- HTML and JavaScript with custom CSS
-- RSS feeds (such as Medium posts)
-- Images and a resume PDF
-- Colleague endorsement slideshow
-- Contact form
-
-I can’t wait to see the amazing portfolios you’ll create. Once you have, tag me on [my LinkedIn](https://www.linkedin.com/in/vicky-tck/?ref=blog.streamlit.io). I'd love to celebrate your accomplishments and get inspired by your work! 🎉💡
+1. Home (Introduction - about me)
+2. Resumé (downloadable as pdf)
+3. Machine Learning Projects (here I will download ML experience I am gaining)
+4. SAC Demo (I used to work as a dashboard developer using the BI Tool SAP Analytics Cloud, here you find a brief demo what the tool looks like)
+5. My Hobbies
