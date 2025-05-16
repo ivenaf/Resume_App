@@ -70,7 +70,7 @@ st.markdown("""
 st.title("🤖 Machine Learning Projects")
 st.write("*(To be updated regularly with new projects.*)")
 st.subheader("1. Insurance Fraud Detection")
-st.write("This is an overview of a ***supervised learning, binary classification*** project that detects insurance fraud using a dataset.")
+st.write("This is an overview of a ***supervised learning, binary classification*** project that detects insurance fraud using a 1000-sample dataset.")
 st.write("Click the buttons below to access the GitHub repository and live Streamlit app.")
 
 # Create columns for the buttons

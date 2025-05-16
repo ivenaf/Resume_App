@@ -6,6 +6,7 @@ from streamlit_timeline import timeline
 import streamlit.components.v1 as components
 from PIL import Image
 import base64
+import os
 
 # IMPORTANT: Page config must be the first Streamlit command
 st.set_page_config(
@@ -134,9 +135,16 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Load info from constant.py
-from constant import info
+try:
+    from constant import info
+except ImportError:
+    # Default information if constant.py is not available
+    info = {
+        "Name": "Nathalie Mugrauer",
+        "Email": "example@example.com",
+        "Intro": "Data Scientist | Front-End Data Consultant"
+    }
 
-# Rest of your Home.py code remains the same...
 # Load a Lottie animation from a URL
 def load_lottieurl(url: str):
     r = requests.get(url)
@@ -146,11 +154,25 @@ def load_lottieurl(url: str):
 
 # Apply local CSS styles from a file
 def local_css(file_name):
-    with open(file_name) as f:
-        st.markdown('<style>{}</style>'.format(f.read()), unsafe_allow_html=True)
+    try:
+        with open(file_name) as f:
+            st.markdown('<style>{}</style>'.format(f.read()), unsafe_allow_html=True)
+    except Exception:
+        pass  # Silently fail if the CSS file isn't found
 
 # Apply local CSS styles from the "style.css" file          
-local_css("style/style.css")
+try:
+    local_css("style/style.css")
+except Exception:
+    pass  # Silently fail if the CSS file isn't found
+
+# Function to convert image to base64 with better error handling
+def get_image_as_base64(image_path, fallback_url=None):
+    try:
+        with open(image_path, "rb") as img_file:
+            return base64.b64encode(img_file.read()).decode()
+    except Exception:
+        return None
 
 # SECTION 1: GREETING WITH PROFILE PICTURE
 # Create a container to organize content
@@ -159,24 +181,25 @@ with st.container():
     # Get profile picture as base64 for embedding in HTML
     try:
         image_path = "images/me.jpg"
-        with open(image_path, "rb") as img_file:
-            img_base64 = base64.b64encode(img_file.read()).decode()
-            
-        # Create greeting with profile picture - WITH FORCED WHITE TEXT
-        name = info['Name']
-        greeting_html = f"""
-        <div class="greeting-container">
-            <img src="data:image/jpeg;base64,{img_base64}" class="profile-pic-greeting" alt="Nathalie Mugrauer">
-            <div style="color: white !important;">
-                <h1 class="greeting-text" style="color: white !important;">Hi, I'm {name} 👋</h1>
-                <p class="intro-text" style="color: white !important;">{info["Intro"]}</p>
+        img_base64 = get_image_as_base64(image_path)
+        
+        if img_base64:    
+            # Create greeting with profile picture - WITH FORCED WHITE TEXT
+            name = info['Name']
+            greeting_html = f"""
+            <div class="greeting-container">
+                <img src="data:image/jpeg;base64,{img_base64}" class="profile-pic-greeting" alt="Nathalie Mugrauer">
+                <div style="color: white !important;">
+                    <h1 class="greeting-text" style="color: white !important;">Hi, I'm {name} 👋</h1>
+                    <p class="intro-text" style="color: white !important;">{info["Intro"]}</p>
+                </div>
             </div>
-        </div>
-        """
-        st.markdown(greeting_html, unsafe_allow_html=True)
-    except Exception as e:
+            """
+            st.markdown(greeting_html, unsafe_allow_html=True)
+        else:
+            raise Exception("Image conversion failed")
+    except Exception:
         # Fallback to the old style if image can't be loaded
-        st.error(f"Error loading profile image: {e}")
         name = info['Name']
         st.markdown(f'''<h1 style="text-align:center;background-image: linear-gradient(to right,#1E3A5F, #4682B4);
                     font-size:60px;border-radius:2%;">
@@ -247,18 +270,31 @@ with st.container():
         with col3_2:
             # Use the local SAC.png image from images folder
             try:
+                # First attempt to load directly - will work locally
                 image = Image.open("images/SAC.png")
                 st.image(image, width=140)
-            except Exception as e:
-                # Fallback to text-based SAC logo
-                st.markdown("""
-                <div style='text-align: center; display: flex; justify-content: center; align-items: center; height: 70px;'>
-                    <div style='font-weight: bold; text-align: center;'>
-                        <span style='color: #0066b3; font-size: 24px;'>SAP</span><br>
-                        <span style='color: #0066b3; font-size: 14px;'>Analytics Cloud</span>
+            except Exception:
+                # If direct loading fails, try using base64 encoding
+                try:
+                    sac_base64 = get_image_as_base64("images/SAC.png")
+                    if sac_base64:
+                        st.markdown(f"""
+                        <div style='text-align: center;'>
+                            <img src="data:image/png;base64,{sac_base64}" width="140">
+                        </div>
+                        """, unsafe_allow_html=True)
+                    else:
+                        raise Exception("SAC image conversion failed")
+                except Exception:
+                    # Fallback to text-based SAC logo
+                    st.markdown("""
+                    <div style='text-align: center; display: flex; justify-content: center; align-items: center; height: 70px;'>
+                        <div style='font-weight: bold; text-align: center;'>
+                            <span style='color: #0066b3; font-size: 24px;'>SAP</span><br>
+                            <span style='color: #0066b3; font-size: 14px;'>Analytics Cloud</span>
+                        </div>
                     </div>
-                </div>
-                """, unsafe_allow_html=True)
+                    """, unsafe_allow_html=True)
         
         # The label stays in the main col3
         st.markdown("<p style='text-align: center; color: #1E3A5F;'>SAC</p>", unsafe_allow_html=True)
@@ -289,11 +325,24 @@ with st.container():
         with col4_2:
             # Use the local MLflow.png image from images folder
             try:
+                # First attempt to load directly - will work locally
                 mlflow_image = Image.open("images/MLflow.png")
                 st.image(mlflow_image, width=140)
-            except Exception as e:
-                # Fallback to online image
-                st.markdown("<div style='text-align: center;'><img src='https://mlflow.org/docs/latest/_static/MLflow-logo-final-black.png' width='100' height='70'></div>", unsafe_allow_html=True)
+            except Exception:
+                # If direct loading fails, try using base64 encoding
+                try:
+                    mlflow_base64 = get_image_as_base64("images/MLflow.png")
+                    if mlflow_base64:
+                        st.markdown(f"""
+                        <div style='text-align: center;'>
+                            <img src="data:image/png;base64,{mlflow_base64}" width="140">
+                        </div>
+                        """, unsafe_allow_html=True)
+                    else:
+                        raise Exception("MLflow image conversion failed")
+                except Exception:
+                    # Fallback to online image
+                    st.markdown("<div style='text-align: center;'><img src='https://mlflow.org/docs/latest/_static/MLflow-logo-final-black.png' width='100' height='70'></div>", unsafe_allow_html=True)
         
         # The label stays in the main col4
         st.markdown("<p style='text-align: center; color: #1E3A5F;'>MLflow</p>", unsafe_allow_html=True)
