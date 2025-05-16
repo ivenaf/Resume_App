@@ -2,6 +2,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 from PIL import Image
 import os
+import base64
 
 # Set page config
 st.set_page_config(
@@ -64,32 +65,47 @@ st.markdown("""
     p, span, h1, h2, h3, h4, h5, h6 {
         color: #2C3E50 !important; /* Dark blue-gray for text */
     }
+    
+    /* Video Container */
+    .video-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin: 20px 0;
+    }
+    
+    /* Info Box */
+    .info-box {
+        background-color: #e1f5fe;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 20px 0;
+        border-left: 5px solid #4682B4;
+    }
     </style>
 """, unsafe_allow_html=True)
 
 # Page title and description
 st.title("📊 My SAC - 2 Minute Demo")
 
-# Create a centered container for the logo
-col1, col2, col3 = st.columns([1, 2, 1])
-
-
 st.markdown("""
-This page showcases a demonstration of an  SAC example-dashboard I built. 
+This page showcases a demonstration of an SAC example-dashboard I built. 
 It highlights some key features and use cases of SAC as a business intelligence tool.
 """)
 
 # Create some space
 st.write("")
 
-
+# SOLUTION PART 1: Use a reliable video hosting service instead of local file
 # Google Drive file ID for the video
 file_id = "1kGoknBoeG8ptPGi4LImYlGYWNHMBsoaE"
 
-# Display the video using Google Drive embedding with updated parameters
+# SOLUTION PART 2: Use multiple fallback options to ensure video displays
+
+# Option 1: Try Google Drive embedding (most reliable method for Google Drive videos)
 st.markdown("### Watch the Demo Video")
 st.markdown(f"""
-<div style="display: flex; justify-content: center;">
+<div class="video-container">
     <iframe 
         src="https://drive.google.com/file/d/{file_id}/preview" 
         width="800" 
@@ -102,12 +118,25 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-# Add a fallback link in case the embedding doesn't work
+# Option 2: Provide a clear message and direct link to handle browser security issues
 st.markdown(f"""
 <div style="text-align: center; margin-top: 10px; margin-bottom: 30px;">
-    <a href="https://drive.google.com/file/d/{file_id}/view" target="_blank" style="color: #4682B4; text-decoration: none; font-size: 14px;">
-        If the video doesn't load, click here to watch directly on Google Drive
+    <a href="https://drive.google.com/file/d/{file_id}/view" target="_blank" style="color: #4682B4; text-decoration: none; font-size: 16px;">
+        ▶️ If the video doesn't load above, click here to watch directly on Google Drive
     </a>
+</div>
+""", unsafe_allow_html=True)
+
+# Option 3: Show a helpful message when the video can't be loaded
+st.markdown("""
+<div class="info-box">
+    <p><strong>Note:</strong> If you're having trouble viewing the video, it might be due to your browser's security settings. 
+    You can try the following:</p>
+    <ul>
+        <li>Click the direct link above to watch on Google Drive</li>
+        <li>Try using a different browser</li>
+        <li>Disable any content blockers for this site</li>
+    </ul>
 </div>
 """, unsafe_allow_html=True)
 
@@ -126,3 +155,4 @@ During my time at Vaillant Group from July 2022 to November 2024, I served as a 
 
 This experience has given me a thorough understanding of how to leverage SAC to transform business data into actionable insights.
 """)
+

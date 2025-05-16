@@ -131,6 +131,37 @@ st.markdown("""
     .greeting-container div {
         color: white !important;
     }
+    
+    /* Form styling */
+    form {
+        width: 100%;
+    }
+    
+    input, textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+    }
+    
+    textarea {
+        height: 150px;
+    }
+    
+    button[type="submit"] {
+        background-color: #4682B4;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    
+    button[type="submit"]:hover {
+        background-color: #1E3A5F;
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -158,16 +189,16 @@ def local_css(file_name):
         with open(file_name) as f:
             st.markdown('<style>{}</style>'.format(f.read()), unsafe_allow_html=True)
     except Exception:
-        pass  # Silently fail if the CSS file isn't found
+        pass
 
 # Apply local CSS styles from the "style.css" file          
 try:
     local_css("style/style.css")
 except Exception:
-    pass  # Silently fail if the CSS file isn't found
+    pass
 
 # Function to convert image to base64 with better error handling
-def get_image_as_base64(image_path, fallback_url=None):
+def get_image_as_base64(image_path):
     try:
         with open(image_path, "rb") as img_file:
             return base64.b64encode(img_file.read()).decode()
@@ -176,7 +207,6 @@ def get_image_as_base64(image_path, fallback_url=None):
 
 # SECTION 1: GREETING WITH PROFILE PICTURE
 # Create a container to organize content
-# Update the greeting HTML to force white text color
 with st.container():
     # Get profile picture as base64 for embedding in HTML
     try:
@@ -197,9 +227,20 @@ with st.container():
             """
             st.markdown(greeting_html, unsafe_allow_html=True)
         else:
-            raise Exception("Image conversion failed")
+            # Default GitHub-style avatar as fallback
+            default_avatar = f"https://ui-avatars.com/api/?name={info['Name'].replace(' ', '+')}&background=1E3A5F&color=fff&size=220"
+            greeting_html = f"""
+            <div class="greeting-container">
+                <img src="{default_avatar}" class="profile-pic-greeting" alt="Nathalie Mugrauer">
+                <div style="color: white !important;">
+                    <h1 class="greeting-text" style="color: white !important;">Hi, I'm {info['Name']} 👋</h1>
+                    <p class="intro-text" style="color: white !important;">{info["Intro"]}</p>
+                </div>
+            </div>
+            """
+            st.markdown(greeting_html, unsafe_allow_html=True)
     except Exception:
-        # Fallback to the old style if image can't be loaded
+        # Fallback to the old style if everything fails
         name = info['Name']
         st.markdown(f'''<h1 style="text-align:center;background-image: linear-gradient(to right,#1E3A5F, #4682B4);
                     font-size:60px;border-radius:2%;">
@@ -222,7 +263,6 @@ with st.container():
         with open('timeline.json', "r") as f:
             timeline_data = json.load(f)
         
-        # Display a single clean timeline - no duplicates
         # Apply styling before rendering the timeline
         st.markdown("""
         <style>
@@ -248,9 +288,9 @@ with st.container():
 # Add extra space between timeline and data tools
 st.markdown("<div style='margin-top: 80px;'></div>", unsafe_allow_html=True)
 
-        
-     
+
 # SECTION 3: DATA TOOLS
+
 with st.container():
     st.subheader('⚒️ Some of the data tools I have worked with')
     col1, col2, col3, col4 = st.columns([1, 1, 1, 1])
@@ -264,43 +304,20 @@ with st.container():
         st.markdown("<div style='text-align: center;'><img src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg' width='70' height='70'></div>", unsafe_allow_html=True)
         st.markdown("<p style='text-align: center; color: #1E3A5F;'>GitHub</p>", unsafe_allow_html=True)
     
+        # SAC logo - create an HTML/CSS representation of the SAP Analytics Cloud logo
     with col3:
-        # Create columns within col3 to center the image properly
-        col3_1, col3_2, col3_3 = st.columns([1, 3, 1])
-        with col3_2:
-            # Use the local SAC.png image from images folder
-            try:
-                # First attempt to load directly - will work locally
-                image = Image.open("images/SAC.png")
-                st.image(image, width=140)
-            except Exception:
-                # If direct loading fails, try using base64 encoding
-                try:
-                    sac_base64 = get_image_as_base64("images/SAC.png")
-                    if sac_base64:
-                        st.markdown(f"""
-                        <div style='text-align: center;'>
-                            <img src="data:image/png;base64,{sac_base64}" width="140">
-                        </div>
-                        """, unsafe_allow_html=True)
-                    else:
-                        raise Exception("SAC image conversion failed")
-                except Exception:
-                    # Fallback to text-based SAC logo
-                    st.markdown("""
-                    <div style='text-align: center; display: flex; justify-content: center; align-items: center; height: 70px;'>
-                        <div style='font-weight: bold; text-align: center;'>
-                            <span style='color: #0066b3; font-size: 24px;'>SAP</span><br>
-                            <span style='color: #0066b3; font-size: 14px;'>Analytics Cloud</span>
-                        </div>
-                    </div>
-                    """, unsafe_allow_html=True)
-        
-        # The label stays in the main col3
+        st.markdown("""
+        <div style='text-align: center;'>
+            <div style="display: inline-block; width: 100px; height: 70px; background-color: white; text-align: center;">
+                <img src="https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg" width="70" height="35" style="margin-top: 5px;">
+                <div style="font-size: 11px; margin-top: 2px; color: #1E3A5F; font-weight: bold;">Analytics Cloud</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
         st.markdown("<p style='text-align: center; color: #1E3A5F;'>SAC</p>", unsafe_allow_html=True)
-    
+        
     with col4:
-        st.markdown("<div style='text-align: center;'><img src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original-wordmark.svg' width='70' height='70'></div>", unsafe_allow_html=True)
+        st.markdown("<div style='text-align: center;'><img src='https://jupyter.org/assets/homepage/main-logo.svg' width='70' height='70'></div>", unsafe_allow_html=True)
         st.markdown("<p style='text-align: center; color: #1E3A5F;'>JupyterLab</p>", unsafe_allow_html=True)
     
     # Add vertical spacing between rows
@@ -320,49 +337,33 @@ with st.container():
         st.markdown("<p style='text-align: center; color: #1E3A5F;'>Machine Learning</p>", unsafe_allow_html=True)
     
     with col4:
-        # Create columns within col4 to center the image properly
-        col4_1, col4_2, col4_3 = st.columns([1, 3, 1])
-        with col4_2:
-            # Use the local MLflow.png image from images folder
-            try:
-                # First attempt to load directly - will work locally
-                mlflow_image = Image.open("images/MLflow.png")
-                st.image(mlflow_image, width=140)
-            except Exception:
-                # If direct loading fails, try using base64 encoding
-                try:
-                    mlflow_base64 = get_image_as_base64("images/MLflow.png")
-                    if mlflow_base64:
-                        st.markdown(f"""
-                        <div style='text-align: center;'>
-                            <img src="data:image/png;base64,{mlflow_base64}" width="140">
-                        </div>
-                        """, unsafe_allow_html=True)
-                    else:
-                        raise Exception("MLflow image conversion failed")
-                except Exception:
-                    # Fallback to online image
-                    st.markdown("<div style='text-align: center;'><img src='https://mlflow.org/docs/latest/_static/MLflow-logo-final-black.png' width='100' height='70'></div>", unsafe_allow_html=True)
-        
-        # The label stays in the main col4
+        # MLflow logo - SVG recreation of the official logo
+        st.markdown("""
+        <div style='text-align: center;'>
+            <svg width="100" height="70" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
+                <!-- ML text -->
+                <text x="10" y="30" font-family="Arial" font-weight="bold" font-size="24" fill="#000000">ml</text>
+                <!-- flow text (italic) -->
+                <text x="40" y="30" font-family="Arial" font-style="italic" font-weight="bold" font-size="24" fill="#0066CC">flow</text>
+                <!-- Arrow symbol -->
+                <path d="M90,25 C92,20 90,15 85,15 C80,15 78,20 80,25" stroke="#0066CC" stroke-width="2" fill="none"/>
+            </svg>
+        </div>
+        """, unsafe_allow_html=True)
         st.markdown("<p style='text-align: center; color: #1E3A5F;'>MLflow</p>", unsafe_allow_html=True)
 
 
-# Add some space before the contact section
-st.markdown("<div style='margin-top: 50px;'></div>", unsafe_allow_html=True)
-
-
-# SECTION 4: CONTACT ME (AT THE BOTTOM) - Moved to left side
+# SECTION 4: CONTACT ME (AT THE BOTTOM)
 with st.container():
     st.subheader("📨 Contact Me")
     
     contact_form = f"""
-        <form action="https://formsubmit.co/{info["Email"]}" method="POST" style="width:100%">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="text" name="name" placeholder="Your name" required>
-            <input type="email" name="email" placeholder="Your email" required>
-            <textarea name="message" placeholder="Your message here" required></textarea>
-            <button type="submit">Send</button>
-        </form>
-        """
+    <form action="https://formsubmit.co/{info["Email"]}" method="POST" style="width:100%">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="name" placeholder="Your name" required>
+        <input type="email" name="email" placeholder="Your email" required>
+        <textarea name="message" placeholder="Your message here" required></textarea>
+        <button type="submit">Send</button>
+    </form>
+    """
     st.markdown(contact_form, unsafe_allow_html=True)

@@ -16,9 +16,6 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-
-
-
 # Apply the blue theme directly
 st.markdown("""
     <style>
@@ -72,6 +69,15 @@ st.markdown("""
     p, span, h1, h2, h3, h4, h5, h6 {
         color: #2C3E50 !important; /* Dark blue-gray for text */
     }
+    
+    /* PDF container */
+    .pdf-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        height: 800px;
+        margin: 0 auto;
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -90,46 +96,96 @@ except ImportError:
 # SECTION 1: Resume Title
 st.title("📄  Resumé")
 
+# Function to get base64 encoded PDF from local file
+def get_pdf_as_base64(file_path):
+    try:
+        with open(file_path, "rb") as pdf_file:
+            return base64.b64encode(pdf_file.read()).decode('utf-8')
+    except Exception as e:
+        return None
+
 # Main resume section
 with st.container():
-    # Google Drive file ID for the resume PDF
+    # Google Drive file ID for reference (not used in new implementation)
     file_id = "1_u0qk1T7ki3-mX45pdMfH--rwBwDjD_L"
     
-    # Display the resume using Google Drive embedding
-    st.markdown(f"""
-    <div style="display: flex; justify-content: center;">
-        <iframe 
-            src="https://drive.google.com/file/d/{file_id}/preview" 
-            width="100%" 
-            height="800" 
-            style="border: none; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"
-            allowfullscreen>
-        </iframe>
-    </div>
-    """, unsafe_allow_html=True)
+    # Try multiple methods to display the resume, starting with the most reliable
+    
+    # OPTION 1: Check if local PDF exists and display it embedded via base64
+    pdf_path = "resume.pdf"  # Update this to your actual path
+    base64_pdf = get_pdf_as_base64(pdf_path)
+    
+    if base64_pdf:
+        # Display PDF using base64 encoding (most reliable method)
+        st.markdown(f"""
+        <div class="pdf-container">
+            <iframe 
+                src="data:application/pdf;base64,{base64_pdf}" 
+                width="100%" 
+                height="800" 
+                style="border: none; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"
+                allowfullscreen>
+            </iframe>
+        </div>
+        """, unsafe_allow_html=True)
+    else:
+        # OPTION 2: Use an external PDF viewer that works with Google Drive
+        st.markdown(f"""
+        <div class="pdf-container">
+            <iframe 
+                src="https://docs.google.com/viewer?embedded=true&url=https://drive.google.com/uc?export=download%26id={file_id}" 
+                width="100%" 
+                height="800" 
+                style="border: none; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"
+                allowfullscreen>
+            </iframe>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # OPTION 3: Display a message if the PDF can't be displayed
+        st.info("If the PDF viewer doesn't load properly, please use the download button below.")
         
 # Download section
 with st.container():
     col1, col2 = st.columns([1, 3])
     
     with col1:
-        # Google Drive download link
-        st.markdown(f"""
-        <div style="margin-top: 20px;">
-            <a href="https://drive.google.com/uc?export=download&id={file_id}" target="_blank">
-                <button style="
-                    background-color: #4682B4;
-                    color: white;
-                    padding: 12px 20px;
-                    border: none;
-                    border-radius: 4px;
-                    cursor: pointer;
-                    font-size: 16px;
-                    font-weight: bold;
-                    width: 100%;
-                ">
-                    Download PDF
-                </button>
-            </a>
-        </div>
-        """, unsafe_allow_html=True)
+        # Try multiple download options
+        
+        # OPTION 1: Use Streamlit's built-in download button if local PDF exists
+        try:
+            if os.path.exists(pdf_path):
+                with open(pdf_path, "rb") as pdf_file:
+                    btn = st.download_button(
+                        label="Download PDF",
+                        data=pdf_file,
+                        file_name="Nathalie_Mugrauer_Resume.pdf",
+                        mime="application/pdf",
+                        key="download-pdf",
+                    )
+            else:
+                # OPTION 2: Google Drive download link as fallback
+                st.markdown(f"""
+                <div style="margin-top: 20px;">
+                    <a href="https://drive.google.com/uc?export=download&id={file_id}" target="_blank">
+                        <button style="
+                            background-color: #4682B4;
+                            color: white;
+                            padding: 12px 20px;
+                            border: none;
+                            border-radius: 4px;
+                            cursor: pointer;
+                            font-size: 16px;
+                            font-weight: bold;
+                            width: 100%;
+                        ">
+                            Download PDF
+                        </button>
+                    </a>
+                </div>
+                """, unsafe_allow_html=True)
+        except Exception as e:
+            st.error(f"Error with download button: {e}")
+            
+            # OPTION 3: Basic link as a last resort
+            st.markdown(f"[Download Resume](https://drive.google.com/uc?export=download&id={file_id})")
