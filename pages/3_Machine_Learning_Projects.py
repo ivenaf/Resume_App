@@ -67,8 +67,9 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Your ML Project page content goes here
-st.title("🤖 Machine Learning Project")
-st.subheader("Insurance Fraud Detection")
+st.title("🤖 Machine Learning Projects")
+st.write("*(To be updated regularly with new projects.*)")
+st.subheader("1. Insurance Fraud Detection")
 st.write("This is an overview of a ***supervised learning, binary classification*** project that detects insurance fraud using a dataset.")
 st.write("Click the buttons below to access the GitHub repository and live Streamlit app.")
 
@@ -128,6 +129,7 @@ with col2:
     </a>
     """, unsafe_allow_html=True)
 
-
+st.subheader(" ")
+st.subheader("2. In progress...")
 
 # You can add more sections about your project methodology, results, etc.

@@ -75,8 +75,8 @@ col1, col2, col3 = st.columns([1, 2, 1])
 
 
 st.markdown("""
-This page showcases a demonstration of SAC dashboarding capabilities. 
-The demo highlights some key features and use cases of SAC as a business intelligence tool.
+This page showcases a demonstration of an  SAC example-dashboard I built. 
+It highlights some key features and use cases of SAC as a business intelligence tool.
 """)
 
 # Create some space
@@ -84,20 +84,18 @@ st.write("")
 
 
 # Check if the video file exists
-video_path = "images/SAC_recording.mp4"
-if os.path.exists(video_path):
-    # Create a centered container for the video
-    col1, col2, col3 = st.columns([1, 3, 1])
-    
-    with col2:
-        # Use the local video file
-        video_file = open(video_path, 'rb')
-        video_bytes = video_file.read()
-        st.video(video_bytes)
-        
-else:
-    st.error(f"Video file not found at {video_path}. Please ensure the file exists.")
-    st.info("Place your SAC_recording.mp4 file in the 'images' folder.")
+
+file_id = "1kGoknBoeG8ptPGi4LImYlGYWNHMBsoaE"
+
+st.markdown("### Watch the Demo Video")
+st.markdown(f"""
+<div style="display: flex; justify-content: center;">
+    <iframe src="https://drive.google.com/file/d/{file_id}/preview" 
+    width="800" height="450" allow="autoplay"></iframe>
+</div>
+""", unsafe_allow_html=True)
+
+
 
 # Add your personal experience with SAC
 st.write("")

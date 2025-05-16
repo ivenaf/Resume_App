@@ -144,7 +144,7 @@ st.title("🎨 My Hobbies & Interests")
 # Quote section
 st.markdown("""<div style="background-color: #E6F0FF; padding: 20px; border-radius: 10px; margin-bottom: 30px;">
     <p style="font-size: 18px; font-style: italic; text-align: center;">
-    "We don't stop playing because we grow old; we grow old because we stop playing." — George Bernard Shaw
+    "We don't stop playing because we grow old; we grow old because we stop playing." — G. B. Shaw
     </p>
 </div>""", unsafe_allow_html=True)
 
@@ -188,7 +188,7 @@ with col3:
             <img src="data:image/png;base64,{painting_img}" width="120">
         </div>
         <h3 class="hobby-title">Painting</h3>
-        <p class="hobby-description">I usually get creative in the dark times of the year.</p>
+        <p class="hobby-description">I usually get creative in the darker times of the year.</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -225,7 +225,7 @@ st.markdown("<div style='margin-top: 40px;'></div>", unsafe_allow_html=True)
 st.markdown("""
 <div style="background-color: #E6F0FF; padding: 20px; border-radius: 10px; text-align: center;">
     <h3 style="color: #1E3A5F !important;">How I Find Balance</h3>
-    <p>These hobbies help me maintain a healthy work-life balance and bring different kinds of joy to my life. 
+    <p>Different activities help me maintain a healthy work-life balance and bring different kinds of joy to my life. 
     I believe that nurturing diverse interests makes us more creative problem-solvers in our professional lives too.</p>
 </div>
 """, unsafe_allow_html=True)
