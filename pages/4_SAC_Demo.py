@@ -83,19 +83,33 @@ It highlights some key features and use cases of SAC as a business intelligence 
 st.write("")
 
 
-# Check if the video file exists
-
+# Google Drive file ID for the video
 file_id = "1kGoknBoeG8ptPGi4LImYlGYWNHMBsoaE"
 
+# Display the video using Google Drive embedding with updated parameters
 st.markdown("### Watch the Demo Video")
 st.markdown(f"""
 <div style="display: flex; justify-content: center;">
-    <iframe src="https://drive.google.com/file/d/{file_id}/preview" 
-    width="800" height="450" allow="autoplay"></iframe>
+    <iframe 
+        src="https://drive.google.com/file/d/{file_id}/preview" 
+        width="800" 
+        height="450" 
+        frameborder="0"
+        allowfullscreen
+        allow="autoplay; encrypted-media"
+        style="border: none; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"
+    ></iframe>
 </div>
 """, unsafe_allow_html=True)
 
-
+# Add a fallback link in case the embedding doesn't work
+st.markdown(f"""
+<div style="text-align: center; margin-top: 10px; margin-bottom: 30px;">
+    <a href="https://drive.google.com/file/d/{file_id}/view" target="_blank" style="color: #4682B4; text-decoration: none; font-size: 14px;">
+        If the video doesn't load, click here to watch directly on Google Drive
+    </a>
+</div>
+""", unsafe_allow_html=True)
 
 # Add your personal experience with SAC
 st.write("")

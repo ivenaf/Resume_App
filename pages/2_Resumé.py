@@ -7,6 +7,7 @@ from PIL import Image
 import base64
 import os
 
+
 # IMPORTANT: Page config must be the first Streamlit command
 st.set_page_config(
     page_title="Nathalie Mugrauer | Resumé",
@@ -14,6 +15,9 @@ st.set_page_config(
     page_icon="🔷",
     initial_sidebar_state="expanded"
 )
+
+
+
 
 # Apply the blue theme directly
 st.markdown("""
@@ -88,60 +92,44 @@ st.title("📄  Resumé")
 
 # Main resume section
 with st.container():
-    # Check multiple locations for the resume PDF
-    possible_paths = [
-        "images/resume.pdf",
-        "files/resume.pdf",
-        "resume.pdf",
-        "../resume.pdf"
-    ]
+    # Google Drive file ID for the resume PDF
+    file_id = "1_u0qk1T7ki3-mX45pdMfH--rwBwDjD_L"
     
-    # Find the first path that exists
-    resume_pdf_path = None
-    for path in possible_paths:
-        if os.path.exists(path):
-            resume_pdf_path = path
-            break
-    
-    if resume_pdf_path:
-        try:
-            # Display PDF using iframe
-            with open(resume_pdf_path, "rb") as f:
-                base64_pdf = base64.b64encode(f.read()).decode('utf-8')
-                pdf_display = f"""
-                    <iframe src="data:application/pdf;base64,{base64_pdf}" width="100%" height="800" 
-                    style="border: none; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" allowfullscreen></iframe>
-                """
-                st.markdown(pdf_display, unsafe_allow_html=True)
-        except Exception as e:
-            st.error(f"Error loading resume: {e}")
-            st.info(f"Found the file at {resume_pdf_path} but couldn't load it properly.")
-    else:
-        st.error("Resume PDF file not found")
-        st.info("""
-        Please add your resume as 'resume.pdf' in one of these locations:
-        - 'images/resume.pdf'
-        - 'files/resume.pdf'
-        - in the main project directory
-        """)
+    # Display the resume using Google Drive embedding
+    st.markdown(f"""
+    <div style="display: flex; justify-content: center;">
+        <iframe 
+            src="https://drive.google.com/file/d/{file_id}/preview" 
+            width="100%" 
+            height="800" 
+            style="border: none; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"
+            allowfullscreen>
+        </iframe>
+    </div>
+    """, unsafe_allow_html=True)
         
 # Download section
 with st.container():
-
     col1, col2 = st.columns([1, 3])
     
     with col1:
-        if resume_pdf_path:
-            try:
-                with open(resume_pdf_path, "rb") as pdf_file:
-                    pdf_bytes = pdf_file.read()
-                    st.download_button(
-                        label="Download PDF",
-                        data=pdf_bytes,
-                        file_name="Nathalie_Mugrauer_Resume.pdf",
-                        mime="application/pdf"
-                    )
-            except Exception as e:
-                st.error(f"Download error: {e}")
-        else:
-            st.warning("Resume PDF not available for download")
+        # Google Drive download link
+        st.markdown(f"""
+        <div style="margin-top: 20px;">
+            <a href="https://drive.google.com/uc?export=download&id={file_id}" target="_blank">
+                <button style="
+                    background-color: #4682B4;
+                    color: white;
+                    padding: 12px 20px;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    font-size: 16px;
+                    font-weight: bold;
+                    width: 100%;
+                ">
+                    Download PDF
+                </button>
+            </a>
+        </div>
+        """, unsafe_allow_html=True)
