@@ -70,7 +70,7 @@ st.markdown("""
 st.title("🤖 Machine Learning Projects")
 st.write("*(To be updated regularly with new projects.*)")
 st.subheader("1. Insurance Fraud Detection")
-st.write("This is an overview of a ***supervised learning, binary classification*** project that detects insurance fraud using a 1000-sample dataset.")
+st.markdown("This is an overview of a <span style='font-weight: bold; font-style: italic; text-decoration: underline;'>supervised learning, binary classification</span> project that aims on detecting insurance fraud using a 1000-sample dataset.", unsafe_allow_html=True)
 st.write("My project team consisted of 3 members and this project was our final delivery during the Data Science Bootcamp.")
 st.write("Click the buttons below to access the GitHub repository and live Streamlit app.")
 
