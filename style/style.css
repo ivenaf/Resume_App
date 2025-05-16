@@ -1,0 +1,73 @@
+/* Blue theme for the resume app */
+
+/* Form styling */
+form {
+    padding: 15px;
+    background-color: #f0f8ff;
+    border-radius: 10px;
+    border: 1px solid #05BFDB;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #088395 !important;
+    border-radius: 5px;
+}
+
+button[type=submit] {
+    background-color: #0A4D68 !important;
+    color: white !important;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+button[type=submit]:hover {
+    background-color: #088395 !important;
+}
+
+/* General styling */
+h1, h2, h3 {
+    color: #0A4D68;
+}
+
+a {
+    color: #088395;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #05BFDB;
+    text-decoration: underline;
+}
+
+/* Timeline customization */
+.vis-timeline {
+    border: 1px solid #088395;
+    border-radius: 5px;
+}
+
+.vis-item {
+    background-color: #05BFDB;
+    border-color: #0A4D68;
+}
+
+.vis-item.vis-selected {
+    background-color: #0A4D68;
+    border-color: #0A4D68;
+}
+
+/* Style text inputs */
+[data-testid="stTextInput"] > div > div > input {
+    border: 1px solid #088395;
+}
+
+/* Style text areas */
+[data-testid="stTextArea"] > div > div > textarea {
+    border: 1px solid #088395;
+}

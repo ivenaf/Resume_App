@@ -1,0 +1,133 @@
+{
+    "title": {
+        "media": {
+          "url": "",
+          "caption": "",
+          "credit": ""
+        },
+        "text": {
+          "headline": "My Journey",
+          "text": "<p>A timeline of the main events in my life.</p>"
+        }
+    },
+    "events": [
+      {
+        "start_date": {
+          "year": "1984",
+          "display_date": "1984"
+        },
+        "text": {
+          "headline": "Born in La Paz, Bolivia",
+          "text": "<p>My journey began in 1984 in the beautiful city of La Paz, situated in the Andes mountains.</p>"
+        }
+      },
+      {
+        "start_date": {
+          "year": "2002"
+        },
+        "end_date": {
+          "year": "2004"
+        },
+        "text": {
+          "headline": "Moving to Germany",
+          "text": "<p>After getting my high school diploma, I moved to Germany and spent 1-2 years learning the German language and getting my German Abitur.</p>"
+        }
+      },
+      {
+        "start_date": {
+          "year": "2005"
+        },
+        "end_date": {
+          "year": "2011"
+        },
+        "text": {
+          "headline": "Bachelor and Master in Economics",
+          "text": "<p>University of Münster (WWU)</p>"
+        }
+      },
+      {
+        "start_date": {
+          "year": "2012",
+          "month": "8"
+        },
+        "end_date": {
+          "year": "2020",
+          "month": "12"
+        },
+        "text": {
+          "headline": "Back Office Controller",
+          "text": "<p><strong>Statkraft Group</strong><br>Team Commodity Operations</p>"
+        }
+      },
+      {
+        "start_date": {
+          "year": "2016"
+        },
+        "text": {
+          "headline": "👶 Son",
+          "text": "<p style='color: #0066ff;'>♂️</p>"
+        }
+      },
+      {
+        "start_date": {
+          "year": "2018"
+        },
+        "text": {
+          "headline": "👶 Daughter",
+          "text": "<p style='color: #ff69b4;'>♀️</p>"
+        }
+      },
+      {
+        "start_date": {
+          "year": "2021",
+          "month": "1"
+        },
+        "end_date": {
+          "year": "2022",
+          "month": "4"
+        },
+        "text": {
+          "headline": "Controller",
+          "text": "<p><strong>Statkraft Group</strong><br>Team Financial Reporting and Controlling</p>"
+        }
+      },
+      {
+        "start_date": {
+          "year": "2022",
+          "month": "7"
+        },
+        "end_date": {
+          "year": "2024",
+          "month": "11"
+        },
+        "text": {
+          "headline": "Front-End Data Consultant / SAC Developer",
+          "text": "<p><strong>Vaillant Group</strong><br>Team Business Intelligence Center of Excellence</p>"
+        }
+      },
+      {
+        "start_date": {
+          "year": "2025",
+          "month": "2"
+        },
+        "end_date": {
+          "year": "2025",
+          "month": "5"
+        },
+        "text": {
+          "headline": "Data Science by DataScientest",
+          "text": "<p>Attended a comprehensive Data Science bootcamp, currently finishing the program.</p>"
+        }
+      },
+      {
+        "start_date": {
+          "year": "2025",
+          "month": "6"
+        },
+        "text": {
+          "headline": "🎉 Data Science Journey Begins 🎉 ",
+          "text": "<p>My journey in Data Science is just beginning. I'm excited to apply my new skills and continue learning in this rapidly evolving field.</p>"
+        }
+    }
+    ]
+}
