@@ -90,7 +90,7 @@ st.title("📊 My SAC - 2 Minute Demo")
 
 st.markdown("""
 This page showcases a demonstration of an SAC example-dashboard I built. 
-It highlights some key features and use cases of SAC as a business intelligence tool.
+It highlights some key features of SAC as a business intelligence tool.
 """)
 
 # Create some space

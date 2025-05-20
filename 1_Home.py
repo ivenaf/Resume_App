@@ -336,21 +336,6 @@ with st.container():
         st.markdown("<div style='text-align: center;'><img src='https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png' width='100' height='70'></div>", unsafe_allow_html=True)
         st.markdown("<p style='text-align: center; color: #1E3A5F;'>Machine Learning</p>", unsafe_allow_html=True)
     
-    with col4:
-        # MLflow logo - SVG recreation of the official logo
-        st.markdown("""
-        <div style='text-align: center;'>
-            <svg width="100" height="70" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
-                <!-- ML text -->
-                <text x="10" y="30" font-family="Arial" font-weight="bold" font-size="24" fill="#000000">ml</text>
-                <!-- flow text (italic) -->
-                <text x="40" y="30" font-family="Arial" font-style="italic" font-weight="bold" font-size="24" fill="#0066CC">flow</text>
-                <!-- Arrow symbol -->
-                <path d="M90,25 C92,20 90,15 85,15 C80,15 78,20 80,25" stroke="#0066CC" stroke-width="2" fill="none"/>
-            </svg>
-        </div>
-        """, unsafe_allow_html=True)
-        st.markdown("<p style='text-align: center; color: #1E3A5F;'>MLflow</p>", unsafe_allow_html=True)
 
 
 # SECTION 4: CONTACT ME (AT THE BOTTOM)

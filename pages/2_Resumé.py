@@ -107,7 +107,7 @@ def get_pdf_as_base64(file_path):
 # Main resume section
 with st.container():
     # Google Drive file ID for reference (not used in new implementation)
-    file_id = "1PWxoT4ihkWEQ6TdUThCqjl1mDJda4EAI"
+    file_id = "1LhV3Oh4HS6EWhF-OoGenIN2yVDLVpTPx"
     
     # Try multiple methods to display the resume, starting with the most reliable
     
