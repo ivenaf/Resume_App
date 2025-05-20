@@ -16,7 +16,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Apply the blue theme directly - NOW WITH MOBILE RESPONSIVENESS
+# Apply the blue theme directly with added mobile responsiveness
 st.markdown("""
     <style>
     /* Main Content Area */
@@ -164,42 +164,63 @@ st.markdown("""
     
     /* MOBILE RESPONSIVENESS */
     @media (max-width: 768px) {
-        /* Make greeting more compact on mobile */
+        /* Make greeting more compact and centered on mobile */
         .greeting-container {
             flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
             text-align: center !important;
-            padding: 20px !important;
+            padding: 30px 20px !important;
+            height: auto !important;
+            min-height: 400px !important;
         }
         
-        /* Center profile pic on mobile */
+        /* Center profile pic on mobile and give space below */
         .profile-pic-greeting {
             margin-right: 0 !important;
-            margin-bottom: 20px !important;
-            width: 150px !important;
-            height: 150px !important;
+            margin-bottom: 25px !important;
+            width: 180px !important;
+            height: 180px !important;
         }
         
-        /* Adjust greeting text size for mobile */
+        /* Adjust greeting text size and center for mobile */
         .greeting-text {
-            font-size: 32px !important;
+            font-size: 36px !important;
             text-align: center !important;
+            line-height: 1.2 !important;
+            margin-bottom: 15px !important;
         }
         
         /* Adjust intro text for mobile */
         .intro-text {
-            font-size: 16px !important;
+            font-size: 18px !important;
             text-align: center !important;
+            line-height: 1.5 !important;
+            padding: 0 10px !important;
         }
         
-        /* Make timeline height responsive */
-        .timeline-container {
-            height: 850px !important; /* Taller on mobile */
-        }
-        
-        /* Improve data tools section layout on mobile */
+        /* Fix data tools section for mobile */
         [data-testid="column"] {
-            min-width: 150px !important;
-            margin-bottom: 15px !important;
+            width: 50% !important;
+            flex: 0 0 50% !important;
+            padding: 0 10px !important;
+            margin-bottom: 20px !important;
+        }
+        
+        /* Move data tools icons closer together on mobile */
+        [data-testid="column"] > div {
+            padding: 0 !important;
+        }
+        
+        /* Reduce margins between sections on mobile */
+        [data-testid="stVerticalBlock"] > div[style*="margin-top"] {
+            margin-top: 25px !important;
+        }
+        
+        /* Fix overall spacing on mobile */
+        .main .block-container {
+            padding: 1rem 0.5rem !important;
+            margin-top: -60px !important;
         }
         
         /* Improve form usability on mobile */
@@ -207,11 +228,9 @@ st.markdown("""
             font-size: 16px !important; /* Prevents iOS zoom on focus */
         }
         
-        /* Adjust spacing for mobile */
-        .main .block-container {
-            margin-top: -60px !important;
-            padding-left: 10px !important;
-            padding-right: 10px !important;
+        /* Make form button full width on mobile */
+        button[type="submit"] {
+            width: 100% !important;
         }
     }
     </style>
@@ -303,7 +322,7 @@ with st.container():
 # Add substantial space between greeting and timeline
 st.markdown("<div style='margin-top: 40px;'></div>", unsafe_allow_html=True)
 
-# SECTION 2: LIFE SNAPSHOT (TIMELINE) - SIMPLIFIED CLEAN APPROACH
+# SECTION 2: LIFE SNAPSHOT (TIMELINE) - IMPROVED FOR MOBILE
 with st.container():
     st.subheader("🚀 Life Snapshot")
     
@@ -312,7 +331,7 @@ with st.container():
         with open('timeline.json', "r") as f:
             timeline_data = json.load(f)
         
-        # Apply styling before rendering the timeline
+        # Apply styling before rendering the timeline - WITH MOBILE FIXES
         st.markdown("""
         <style>
         /* Make timeline taller */
@@ -325,16 +344,21 @@ with st.container():
             border: none !important;
         }
         
-        /* Make timeline responsive on mobile */
+        /* Mobile-specific timeline adjustments */
         @media (max-width: 768px) {
             .timeline-container {
-                height: 850px !important;
+                height: 850px !important; /* Much taller on mobile */
+            }
+            
+            /* Improve timeline visibility on small screens */
+            .timeline-container iframe {
+                width: 100% !important;
             }
         }
         </style>
         """, unsafe_allow_html=True)
         
-        # Simply display the standard timeline without the custom year markers
+        # Display the timeline
         timeline(timeline_data, height=650)
         
     except Exception as e:
@@ -344,15 +368,15 @@ with st.container():
 # Add extra space between timeline and data tools
 st.markdown("<div style='margin-top: 80px;'></div>", unsafe_allow_html=True)
 
-
-# SECTION 3: DATA TOOLS - MOBILE RESPONSIVE
+# SECTION 3: DATA TOOLS - ARRANGED FOR BETTER MOBILE DISPLAY
 with st.container():
     st.subheader('⚒️ Some of the data tools I have worked with')
     
-    # Create a horizontal rule for visual separation
+    # Add a horizontal separator line
     st.markdown("<hr style='margin: 15px 0 25px 0; border-color: #e0e0e0;'>", unsafe_allow_html=True)
     
-    # First row of skills (Python, GitHub, SAC, JupyterLab)
+    # Create two rows with tools to better handle mobile layout
+    # First row
     col1, col2, col3, col4 = st.columns([1, 1, 1, 1])
     
     with col1:
@@ -381,8 +405,8 @@ with st.container():
     # Add vertical spacing between rows
     st.markdown("<div style='margin-top: 30px;'></div>", unsafe_allow_html=True)
 
-    # Second row of skills (VS Code, Streamlit, Machine Learning, MLflow)
-    col1, col2, col3, col4 = st.columns([1, 1, 1, 1])
+    # Second row of skills
+    col1, col2, col3 = st.columns([1, 1, 1])
     
     with col1:
         st.markdown("<div style='text-align: center;'><img src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg' width='70' height='70'></div>", unsafe_allow_html=True)
@@ -395,36 +419,31 @@ with st.container():
     with col3:
         st.markdown("<div style='text-align: center;'><img src='https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png' width='100' height='70'></div>", unsafe_allow_html=True)
         st.markdown("<p style='text-align: center; color: #1E3A5F;'>Machine Learning</p>", unsafe_allow_html=True)
-    
-    
 
 # Add space before contact form
 st.markdown("<div style='margin-top: 60px;'></div>", unsafe_allow_html=True)
 
-# SECTION 4: CONTACT ME (AT THE BOTTOM) - MOBILE FRIENDLY VERSION
+# SECTION 4: CONTACT ME (AT THE BOTTOM) - IMPROVED FOR MOBILE
 with st.container():
     st.subheader("📨 Contact Me")
     
-    # Create a max-width container for the form on larger screens
+    # Create a centered container for the form
     st.markdown("""
     <div style="max-width: 800px; margin: 0 auto;">
     """, unsafe_allow_html=True)
     
-    # Add some space before the contact form
-    st.markdown("<div style='margin-top: 20px;'></div>", unsafe_allow_html=True)
-    
     contact_form = f"""
-    <form action="https://formsubmit.co/{info["Email"]}" method="POST" style="width:100%;">
+    <form action="https://formsubmit.co/{info["Email"]}" method="POST" style="width:100%">
         <input type="hidden" name="_captcha" value="false">
         <input type="text" name="name" placeholder="Your name" required style="font-size: 16px;">
         <input type="email" name="email" placeholder="Your email" required style="font-size: 16px;">
         <textarea name="message" placeholder="Your message here" required style="font-size: 16px;"></textarea>
-        <button type="submit" style="width: 100%; font-size: 16px;">Send</button>
+        <button type="submit" style="width: 100%; font-size: 16px; padding: 12px;">Send</button>
     </form>
     """
     st.markdown(contact_form, unsafe_allow_html=True)
     
-    # Close the max-width container
+    # Close the centered container
     st.markdown("""
     </div>
     """, unsafe_allow_html=True)
