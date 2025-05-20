@@ -101,7 +101,7 @@ st.markdown("""
 <div class="qr-container">
     <div class="qr-box">
         <h2>Scan this QR Code</h2>
-        <p style="margin-bottom: 20px;">Access my interactive resume on your mobile device</p>
+        <p style="margin-bottom: 20px;">Quick access to my interactive resumé.</p>
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://ivenaf-resume-app-1-home-5rj0a4.streamlit.app/" 
              alt="QR Code to access this app" 
              style="width: 250px; height: 250px; margin: 20px 0;">
@@ -110,9 +110,8 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Add the text correctly with st.write() instead of HTML in the green box
-st.write("Thank you for visiting my interactive resume!")
-st.write("Feel free to share this QR code with others who might be interested in my profile.")
-
+st.write("Thank you for visiting my interactive resumé! Feel free to share this QR code with others who might be interested in my profile.")
+st.write("For optimal viewing experience, please use a desktop or laptop computer.")
 # Optional: Add a download button for the QR code image
 st.markdown("""
 <div style="text-align: center; margin-top: 20px;">
