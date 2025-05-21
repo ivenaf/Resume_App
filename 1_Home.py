@@ -16,8 +16,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Apply the blue theme directly
-# Update the CSS in the style section to make the greeting container taller and ensure white text
+# Apply the blue theme 
 st.markdown("""
     <style>
     /* Main Content Area */
@@ -60,7 +59,7 @@ st.markdown("""
         color: white !important;
     }
     
-    /* Move greeting box up significantly */
+    /* Move greeting box up */
     .main .block-container {
         padding-top: 0 !important;
         margin-top: -100px !important;
@@ -248,13 +247,13 @@ with st.container():
                     <span style="color:#FFFFFF;font-size:17px;">{info["Intro"]}</span></h1>''', 
                     unsafe_allow_html=True)
 
-# Add substantial space between greeting and timeline
+# Add space between greeting and timeline
 st.markdown("<div style='margin-top: 40px;'></div>", unsafe_allow_html=True)
 # Add extra space between timeline and data tools
 st.markdown("<div style='margin-top: 80px;'></div>", unsafe_allow_html=True)
 
 
-# SECTION 2: LIFE SNAPSHOT (TIMELINE) - SIMPLIFIED CLEAN APPROACH
+# SECTION 2: LIFE SNAPSHOT (TIMELINE) - SIMPLIFIED 
 with st.container():
     st.subheader("🚀 Life Snapshot")
     
@@ -338,7 +337,7 @@ with st.container():
     
 
 
-# SECTION 4: CONTACT ME (AT THE BOTTOM)
+# SECTION 4: CONTACT ME (BOTTOM)
 with st.container():
     st.subheader("📨 Contact Me")
     
