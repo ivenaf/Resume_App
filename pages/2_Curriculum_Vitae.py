@@ -10,7 +10,7 @@ import os
 
 # IMPORTANT: Page config must be the first Streamlit command
 st.set_page_config(
-    page_title="Nathalie Mugrauer | Resumé",
+    page_title="Nathalie Mugrauer | Curriculum Vitae",
     layout="wide",
     page_icon="🔷",
     initial_sidebar_state="expanded"
@@ -94,7 +94,7 @@ except ImportError:
     embed_rss = {}
 
 # SECTION 1: Resume Title
-st.title("📄  Resumé")
+st.title("📄  Curriculum Vitae")
 
 # Function to get base64 encoded PDF from local file
 def get_pdf_as_base64(file_path):
@@ -107,7 +107,7 @@ def get_pdf_as_base64(file_path):
 # Main resume section
 with st.container():
     # Google Drive file ID for reference (not used in new implementation)
-    file_id = "14d1r0QUyeHqFSNE6jT8WeBvtnWRBywQJ"
+    file_id = "19laGmycVASmpsRo90GW1XcR9i_lcoosv"
     
     # Try multiple methods to display the resume, starting with the most reliable
     
@@ -159,7 +159,7 @@ with st.container():
                     btn = st.download_button(
                         label="Download PDF",
                         data=pdf_file,
-                        file_name="Nathalie_Mugrauer_Resume.pdf",
+                        file_name="Nathalie_Mugrauer_CV.pdf",
                         mime="application/pdf",
                         key="download-pdf",
                     )
@@ -188,4 +188,4 @@ with st.container():
             st.error(f"Error with download button: {e}")
             
             # OPTION 3: Basic link as a last resort
-            st.markdown(f"[Download Resume](https://drive.google.com/uc?export=download&id={file_id})")
+            st.markdown(f"[Download CV](https://drive.google.com/uc?export=download&id={file_id})")
