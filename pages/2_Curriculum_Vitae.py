@@ -107,8 +107,7 @@ def get_pdf_as_base64(file_path):
 # Main resume section
 with st.container():
     # Google Drive file ID for reference (not used in new implementation)
-    file_id = "19laGmycVASmpsRo90GW1XcR9i_lcoosv"
-    
+    file_id = "1Prz9eOIE6q3_nEPQoSWZDIQdkuZari4p"
     # Try multiple methods to display the resume, starting with the most reliable
     
     # OPTION 1: Check if local PDF exists and display it embedded via base64
