@@ -111,7 +111,8 @@ with st.container():
     # Try multiple methods to display the resume, starting with the most reliable
     
     # OPTION 1: Check if local PDF exists and display it embedded via base64
-    pdf_path = "resume.pdf"  # Update this to your actual path
+    pdf_path = "./images/resume.pdf"
+    # pdf_path = "resume.pdf"  
     base64_pdf = get_pdf_as_base64(pdf_path)
     
     if base64_pdf:
@@ -187,4 +188,4 @@ with st.container():
             st.error(f"Error with download button: {e}")
             
             # OPTION 3: Basic link as a last resort
-            st.markdown(f"[Download CV](https://drive.google.com/uc?export=download&id={file_id})")
+            st.markdown(f"[Download CV](https://drive.google.com/drive/folders/1xQGVm8mHxwZR9HSBc3RZ_d8QmF90_25c?lfhs=2)")
