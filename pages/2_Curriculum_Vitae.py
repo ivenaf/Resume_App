@@ -107,12 +107,12 @@ def get_pdf_as_base64(file_path):
 # Main resume section
 with st.container():
     # Google Drive file ID for reference (not used in new implementation)
-    file_id = "1xQGVm8mHxwZR9HSBc3RZ_d8QmF90_25c?lfhs=2"
+    file_id = "1DP1DQRi2WSYl20YoI9fCBD7ooE5ObXnC"
     # Try multiple methods to display the resume, starting with the most reliable
     
     # OPTION 1: Check if local PDF exists and display it embedded via base64
-    pdf_path = "./images/resume.pdf"
-    # pdf_path = "resume.pdf"  
+    pdf_path = "./images/CV.pdf"
+    # pdf_path = "CV.pdf"  
     base64_pdf = get_pdf_as_base64(pdf_path)
     
     if base64_pdf:
@@ -133,7 +133,7 @@ with st.container():
         st.markdown(f"""
         <div class="pdf-container">
             <iframe 
-                src="https://docs.google.com/viewer?embedded=true&url=https://drive.google.com/uc?export=download%26id={file_id}" 
+                src="https://drive.google.com/file/d/1DP1DQRi2WSYl20YoI9fCBD7ooE5ObXnC/view?usp=drive_link"
                 width="100%" 
                 height="800" 
                 style="border: none; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"
@@ -188,4 +188,4 @@ with st.container():
             st.error(f"Error with download button: {e}")
             
             # OPTION 3: Basic link as a last resort
-            st.markdown(f"[Download CV](https://drive.google.com/drive/folders/1xQGVm8mHxwZR9HSBc3RZ_d8QmF90_25c?lfhs=2)")
+            st.markdown(f"https://drive.google.com/file/d/1DP1DQRi2WSYl20YoI9fCBD7ooE5ObXnC/view?usp=drive_link")

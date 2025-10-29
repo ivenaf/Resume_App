@@ -103,7 +103,7 @@ file_id = "1kGoknBoeG8ptPGi4LImYlGYWNHMBsoaE"
 # SOLUTION PART 2: Use multiple fallback options to ensure video displays
 
 # Option 1: Try Google Drive embedding (most reliable method for Google Drive videos)
-st.markdown("### Watch the Demo Video")
+st.markdown("### Watch the Demo Video (no Audio)")
 st.markdown(f"""
 <div class="video-container">
     <iframe 

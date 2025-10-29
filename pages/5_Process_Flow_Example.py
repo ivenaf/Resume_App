@@ -10,9 +10,9 @@ st.set_page_config(
 st.title("🔗 DPW – Digital Process Flow")
 
 st.markdown("""
-Welcome to the Digital Process Flow (DPW) demo page.
-
-You can explore the DPW Streamlit app by clicking the link below:
+This successful Process Flow demonstration, which was very well received in my second interview, highlights my ability to use AI-assisted coding (VS Code + GitHub Copilot) to significantly enhance development speed. The solution features a Streamlit (Python based) front-end and back-end, utilizing a temporary SQLite database for data storage.
+            
+The DPW Streamlit app is available for exploration via the link below. The temporary database is reset frequently, and the application might contain no operational data
 """)
 
 st.markdown("""
