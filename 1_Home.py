@@ -209,7 +209,7 @@ def get_image_as_base64(image_path):
 with st.container():
     # Get profile picture as base64 for embedding in HTML
     try:
-        image_path = "images/me.jpg"
+        image_path = "images/me2.png"
         img_base64 = get_image_as_base64(image_path)
         
         if img_base64:    
@@ -333,7 +333,11 @@ with st.container():
     
     with col3:
         st.markdown("<div style='text-align: center;'><img src='https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png' width='100' height='70'></div>", unsafe_allow_html=True)
-        st.markdown("<p style='text-align: center; color: #1E3A5F;'>Machine Learning</p>", unsafe_allow_html=True)
+        st.markdown("<p style='text-align: center; color: #1E3A5F;'>SciKit</p>", unsafe_allow_html=True)
+
+    with col4:
+        st.markdown("<div style='text-align: center;'><img src='https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg' width='100' height='70'></div>", unsafe_allow_html=True)
+        st.markdown("<p style='text-align: center; color: #1E3A5F;'>PowerBI</p>", unsafe_allow_html=True)
     
 
 
